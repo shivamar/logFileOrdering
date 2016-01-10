@@ -8,8 +8,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public  class LogProcessor {
 	static String[] str_ArrayfileNames = null;
-	static String dataDir="";
+	static String inputDataDir="";
+	static String outputDir="";
 	static int numberOfThreads;
+	//to be set
+	static int bufferWriterSize=8192;
 	//thread updates these two variables
 	static volatile int fileNum=0;
 	static volatile int cumulativeLength=0;
@@ -19,10 +22,13 @@ public  class LogProcessor {
 	public static void main(String[] args) {
 		
 		//all configurable values initialized here
-		dataDir = "src/data";
+		inputDataDir = "src/data";
+		outputDir="src/output";
 		LogProcessor.numberOfThreads = 3;
 		
-		File dir = new File(dataDir);
+		setBufferSize();
+		
+		File dir = new File(inputDataDir);
 		String[] fileNamesArr = dir.list();
 		str_ArrayfileNames = fileNamesArr;
 		
@@ -34,7 +40,7 @@ public  class LogProcessor {
 				String[] str1 = arg0.split("\\.");
 				String[] str2 = arg1.split("\\.");
 				
-				return str1[1].compareTo(str2[2]);				
+				return str1[2].compareTo(str2[1]);				
 			}			
 		});
 		
@@ -43,5 +49,10 @@ public  class LogProcessor {
 			ReaderWriter rw = new ReaderWriter(i, fileNamesArr.length);
 			rw.start();
 		}			
+	}
+	
+	private static void setBufferSize()
+	{
+		bufferWriterSize=((70*1024*1024) / numberOfThreads)/2;
 	}
 }
