@@ -22,9 +22,9 @@ public  class LogProcessor {
 	public static void main(String[] args) {
 		
 		//all configurable values initialized here
-		inputDataDir = "src/data";
-		outputDir="src/output";
-		LogProcessor.numberOfThreads = 3;
+		inputDataDir = args[1];//"src/data";
+		outputDir=args[3];//"src/output";
+		LogProcessor.numberOfThreads = Integer.valueOf(args[5]);//7;
 		
 		setBufferSize();
 		
