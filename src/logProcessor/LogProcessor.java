@@ -54,15 +54,15 @@ public class LogProcessor {
 			}
 		});
 
-		ArrayList<ReaderWriter> list = new ArrayList<>();
+		ArrayList<ReaderWriter> listOfThreads = new ArrayList<>();
 		
 		for (int i = 0; i < numberOfThreads; i++) {
 			ReaderWriter rw = new ReaderWriter(i, fileNamesArr.length);
-			list.add(rw);
+			listOfThreads.add(rw);
 			rw.start();
 		}
 		
-		for(ReaderWriter rw : list)
+		for(ReaderWriter rw : listOfThreads)
 		{
 			try {
 				rw.join();
@@ -70,6 +70,8 @@ public class LogProcessor {
 				e.printStackTrace();
 			}
 		}
+		
+		System.out.println("Completed");
 	}
 
 	/**
