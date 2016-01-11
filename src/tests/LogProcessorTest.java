@@ -34,7 +34,7 @@ public class LogProcessorTest {
 
 		String testOutputDir = "src/testOutput";
 		String testInputDir = "src/testData";
-		String threadCount = "5";
+		String threadCount = "10";
 
 		String[] args = { "-input", testInputDir, "-output", testOutputDir,
 				"-threadCount", threadCount };
@@ -56,12 +56,14 @@ public class LogProcessorTest {
 		String[] expectedFileNames = (new File(expectedOutputDir)).list();
 		String[] testFilesNames = (new File(testOutputDir)).list();
 
+		assertEquals(expectedFileNames.length, testFilesNames.length);
+		
 		HashSet<String> hs = new HashSet<>();
 
 		for (String testFile : testFilesNames) {
 			hs.add(testFile);
 		}
-
+		
 		for (String expectedFileName : expectedFileNames) {
 			if (!hs.contains(expectedFileName)) {
 				return false;
@@ -104,7 +106,8 @@ public class LogProcessorTest {
 			if (((readChars2 = fStream_test.read(testFile_bytes, 0,
 					testFile_bytes.length)) != -1)) {
 				if (!b.equals(testFile_bytes))
-					return false;
+					return false;				
+				assertEquals(b.length,testFile_bytes.length);
 			} else
 				return false;
 		}

@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class LogProcessor {
-	static String[] fileNames_StringArr = null;
+	static String[] fileNames_StringArr;
 	static String inputDataDir = "";
 	static String outputDir = "";
 	static int numberOfThreads;
@@ -104,6 +104,6 @@ public class LogProcessor {
 	 * used by all threads
 	 */
 	private static void setBufferSize() {
-		bufferSize = ((70 * 1024 * 1024) / numberOfThreads) / 2;
+		bufferSize = ((70 * 1024 * 1024) / numberOfThreads)/2;
 	}
 }
