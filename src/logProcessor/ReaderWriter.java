@@ -70,12 +70,13 @@ public class ReaderWriter extends Thread {
 				synchronized (LogProcessor.lock1) {
 					if (currFileNum == LogProcessor.fileNum) {
 						// NOTE : 2 lines to remain comment out: for test
-						// purposes only
+						// purposes
 						// System.out.println("LineCount ::" + lineCount
 						// + "## in  currFileNumber::" + currFileNum);
 
-						// update previous files last line count so u can start
-						// writing from this number in your current file
+						// update previous files last line count in thread local
+						// variable to enable writing in current file from
+						// prevFilesLastLineCount+1
 						prevFilesLastLineCount = LogProcessor.cumulativeLength;
 
 						// update the filenumber for next thread to go forward

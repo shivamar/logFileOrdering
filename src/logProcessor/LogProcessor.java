@@ -1,6 +1,7 @@
 package logProcessor;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.concurrent.locks.Lock;
@@ -53,9 +54,21 @@ public class LogProcessor {
 			}
 		});
 
+		ArrayList<ReaderWriter> list = new ArrayList<>();
+		
 		for (int i = 0; i < numberOfThreads; i++) {
 			ReaderWriter rw = new ReaderWriter(i, fileNamesArr.length);
+			list.add(rw);
 			rw.start();
+		}
+		
+		for(ReaderWriter rw : list)
+		{
+			try {
+				rw.join();
+			} catch (InterruptedException e) {				
+				e.printStackTrace();
+			}
 		}
 	}
 
