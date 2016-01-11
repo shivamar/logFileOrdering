@@ -22,6 +22,11 @@ public class LogProcessor {
 	static final Lock lock1 = new ReentrantLock();
 
 	public static void main(String[] args) {
+		
+		if(args == null || args.length != 6){
+			System.out.println("Incorrect Arguments");
+			System.out.println("example arguments: "+"-input <input directory path> -output <output directory path> -threads <integer value greater than 0>");
+		}
 
 		// all configurable values initialized here
 		inputDataDir = args[1];// "src/data";
