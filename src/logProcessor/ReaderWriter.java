@@ -11,7 +11,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+/**
+ * Reads, updates shared variable and writes chronological line-numbered file to disk.
+ * @author Shiva
+ *
+ */
 public class ReaderWriter extends Thread {
 	int totalFiles;
 	int currFileNum;	

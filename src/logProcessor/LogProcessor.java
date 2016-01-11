@@ -6,7 +6,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ * Processes log files and returns chronologically line numbered ordered log files.
+ * @author Shiva
+ *
+ */
 public class LogProcessor {
 	static String[] fileNames_StringArr;
 	static String inputDataDir = "";
@@ -22,11 +26,13 @@ public class LogProcessor {
 	static final Lock lock1 = new ReentrantLock();
 
 	public static void main(String[] args) {
-		
-		if(args == null || args.length != 6){
-			System.out.println("Incorrect Arguments");
-			System.out.println("example arguments: "+"-input <input directory path> -output <output directory path> -threads <integer value greater than 0>");
-		}
+			if (args == null || args.length != 6) {
+				System.out.println("Incorrect Arguments Detected");
+				errorMsg = ErrorMsg.Incorrect_Arguments_Detected.description;
+				System.out.println(errorMsg);
+				
+				return;
+			}
 
 		// all configurable values initialized here
 		inputDataDir = args[1];// "src/data";
